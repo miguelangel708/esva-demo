@@ -14,21 +14,8 @@ from llama_index.embeddings import HuggingFaceEmbedding
 from openai import AuthenticationError
 
 
-openai.api_key = None
-query_engine = None
+openai.api_key = os.environ['OpenAi-apiKey']
 
-# # OpenAI API key
-def printOpenAiKey(key):
-    global query_engine
-    openai.api_key = key
-    print(f"this is the openai api key {openai.api_key}")
-    llm = OpenAI(model="gpt-3.5-turbo", temperature=0.1)
-    index = load_automerging_index(
-        llm=llm,
-        save_dir='./files/ft_merging_index',  #merging means that the docs are separated
-    )
-    query_engine = get_automerging_query_engine(index, similarity_top_k=6)
-    
 # Load LLM
 
 # load vector index database
@@ -68,6 +55,13 @@ def get_automerging_query_engine(
     )
     return auto_merging_engine
 
+llm = OpenAI(model="gpt-3.5-turbo", temperature=0.1)
+index = load_automerging_index(
+    llm=llm,
+    save_dir='./files/ft_merging_index',  #merging means that the docs are separated
+)
+query_engine = get_automerging_query_engine(index, similarity_top_k=6)
+    
 def process_answer(query):
     try:
         if openai.api_key == None: return "ingrese la open ai key"
