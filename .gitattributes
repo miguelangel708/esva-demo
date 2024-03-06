@@ -1,3 +1,4 @@
 files filter=lfs diff=lfs merge=lfs -text
 files/** filter=lfs diff=lfs merge=lfs -text
 files/*.json filter=lfs diff=lfs merge=lfs -text
+files/HR_demo_db/*.json filter=lfs diff=lfs merge=lfs -text
