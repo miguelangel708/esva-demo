@@ -17,4 +17,4 @@ WORKDIR /usr/src/app
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Establecer el comando de entrada
-CMD ["streamlit", "run", "ESVA_interface.py"]
+CMD ["streamlit", "run", "frontend/main.py"]
