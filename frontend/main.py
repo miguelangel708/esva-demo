@@ -11,7 +11,7 @@ st.set_page_config(
 
 # Verificar si el usuario ha iniciado sesión
 if 'logged_in' not in st.session_state:
-    st.session_state.logged_in = False
+    st.session_state.logged_in = True
 
 if st.session_state.logged_in:
     main_page_main()  # Mostrar la página principal
