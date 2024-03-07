@@ -8,7 +8,20 @@ backend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'ba
 sys.path.append(backend_path)
 import ESVA_automerging as LLM_model
 
-def main():
+def insert_newlines(text, every=76):
+    """
+    Inserta un salto de línea cada 'every' caracteres en el texto dado.
+    """
+    return '\n'.join(text[i:i+every] for i in range(0, len(text), every))
+
+
+def init():
+    
+    # page content
+    st.set_page_config(
+        page_title="ESVA",
+        page_icon="https://west.net.co/wp-content/uploads/2023/06/Logo-Usuario-jpg.jpg"
+    )
 
     # Page title and logo
     url_image = "https://west.net.co/wp-content/uploads/2024/01/westlogo.png"
@@ -47,7 +60,8 @@ def main():
             thinking_message.text("pensando...")  # We use st.text instead of st.markdown
             # here in the response put the result of the RAG model
             response  = LLM_model.process_answer(query)
-            # response  = responseTest.response(query)
+            response = insert_newlines(response)
+            # response  = "respuesta sin IA"
             thinking_message.text(response)
 
         # save the answer on messages to load the history in line 26

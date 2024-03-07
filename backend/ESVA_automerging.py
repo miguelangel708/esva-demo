@@ -14,8 +14,7 @@ from llama_index.embeddings import HuggingFaceEmbedding
 from openai import AuthenticationError
 
 
-openai.api_key = os.environ['OpenAi-apiKey']
-
+openai.api_key = "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"
 # Load LLM
 
 # load vector index database
@@ -61,7 +60,6 @@ def get_automerging_query_engine(
     )
     return auto_merging_engine
 
-
 error = None
 try:
     llm = OpenAI(model="gpt-3.5-turbo", temperature=0.1)
@@ -73,19 +71,26 @@ try:
     query_engine = get_automerging_query_engine(index, similarity_top_k=6)
 except Exception as e:
     error = e
-
-
+    
 def process_answer(query):
     try:
         if openai.api_key == None:
             return "ingrese la open ai key"
         if error != None:
             return f"no se pudo cargar el modelo, error: {error}"
-
+        
         response = query_engine.query(query)
         source_documents = response.source_nodes[0].metadata['file_name']
         answer = response.response + f' \n Documento Fuente: {source_documents}'
 
+        # page_list = [int(i.metadata['page_label']) for i in response.source_nodes]
+        #page_list = sorted(list(set(page_list)))
+        #page_list = ', '.join(map(str, set(page_list)))
+        # page_list.sort()
+        # if(source_documents =="Instructivo_Diligenciamiento_Formato_Reporte_de_Eficiencia_de_Combustion_en_T_1PDJHb8.pdf"):
+        #     source_documents = "Instructivo_Diligenciamiento_1PDJHb8"
+        # pass
+        
     except AuthenticationError as e:
         print(f"error de autenticación {e}")
         answer = "llave open ai invalida"
