@@ -1,21 +1,8 @@
 import streamlit as st
 import time
-import sys
-import os
-
-# codigo para importar el backend como script y hacer el llamado
-backend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'backend'))
-sys.path.append(backend_path)
 import ESVA_automerging as LLM_model
 
-def insert_newlines(text, every=76):
-    """
-    Inserta un salto de línea cada 'every' caracteres en el texto dado.
-    """
-    return '\n'.join(text[i:i+every] for i in range(0, len(text), every))
-
-
-def main():
+def init():
     
     # page content
     st.set_page_config(
@@ -57,16 +44,18 @@ def main():
         with st.chat_message("assistant"):
             thinking_message = st.empty()  # Empty container for message "thinking..."
             time.sleep(0.5)
-            thinking_message.text("pensando...")  # We use st.text instead of st.markdown
+            thinking_message.text("thinking...")  # We use st.text instead of st.markdown
             # here in the response put the result of the RAG model
             response  = LLM_model.process_answer(query)
-            response = insert_newlines(response)
             # response  = "respuesta sin IA"
             thinking_message.text(response)
 
         # save the answer on messages to load the history in line 26
         st.session_state.messages.append({"role":"assistant","content":response})
 
+
+def main():
+    init()
 
 if __name__ == '__main__':
     main()
