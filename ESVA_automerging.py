@@ -22,7 +22,7 @@ openai.api_key = os.environ['OpenAi-apiKey']
 def load_automerging_index(
     llm,
     embed_model="sentence-transformers/all-MiniLM-L6-v2",
-    save_dir="./files",
+    save_dir="merging_index",
 ):
     if not os.path.exists(save_dir):
         print("no se encontró base de datos")
@@ -58,7 +58,7 @@ def get_automerging_query_engine(
 llm = OpenAI(model="gpt-3.5-turbo", temperature=0.1)
 index = load_automerging_index(
     llm=llm,
-    save_dir='./files',  #merging means that the docs are separated
+    save_dir='./files/ft_merging_index',  #merging means that the docs are separated
 )
 query_engine = get_automerging_query_engine(index, similarity_top_k=6)
     
@@ -79,4 +79,4 @@ def process_answer(query):
         print(e)
         return "llave open ai invalida"
     
-    return response.response + f' \n Documento Fuente: {source_documents}'
+    return response.response + f' \n Documento Fuente: {source_documents} \n Paginas: {page_list}'
