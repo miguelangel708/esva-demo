@@ -22,7 +22,7 @@ openai.api_key = os.environ['OpenAi-apiKey']
 def load_automerging_index(
     llm,
     embed_model="sentence-transformers/all-MiniLM-L6-v2",
-    save_dir="merging_index",
+    save_dir="./files/ft_merging_index",
 ):
     if not os.path.exists(save_dir):
         print("no se encontró base de datos")
@@ -79,4 +79,4 @@ def process_answer(query):
         print(e)
         return "llave open ai invalida"
     
-    return response.response + f' \n Documento Fuente: {source_documents} \n Paginas: {page_list}'
+    return response.response + f' \n Documento Fuente: {source_documents}'
