@@ -14,10 +14,7 @@ from llama_index.embeddings import HuggingFaceEmbedding
 from openai import AuthenticationError
 
 
-openai.api_key = "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"
-# Load LLM
-
-# load vector index database
+openai.api_key = os.environ['OpenAi-apiKey']
 
 
 def load_automerging_index(

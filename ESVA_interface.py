@@ -15,7 +15,7 @@ def insert_newlines(text, every=76):
     return '\n'.join(text[i:i+every] for i in range(0, len(text), every))
 
 
-def init():
+def main():
     
     # page content
     st.set_page_config(
