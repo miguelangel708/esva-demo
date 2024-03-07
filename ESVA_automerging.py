@@ -79,4 +79,4 @@ def process_answer(query):
         print(e)
         return "llave open ai invalida"
     
-    return response.response + f' \n Documento Fuente: {source_documents} \n Paginas: {page_list}'
+    return response.response + f' \n Documento Fuente: {source_documents}'
