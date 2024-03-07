@@ -2,6 +2,13 @@ import streamlit as st
 import time
 import ESVA_automerging as LLM_model
 
+def insert_newlines(text, every=76):
+    """
+    Inserta un salto de línea cada 'every' caracteres en el texto dado.
+    """
+    return '\n'.join(text[i:i+every] for i in range(0, len(text), every))
+
+
 def init():
     
     # page content
@@ -44,9 +51,10 @@ def init():
         with st.chat_message("assistant"):
             thinking_message = st.empty()  # Empty container for message "thinking..."
             time.sleep(0.5)
-            thinking_message.text("thinking...")  # We use st.text instead of st.markdown
+            thinking_message.text("pensando...")  # We use st.text instead of st.markdown
             # here in the response put the result of the RAG model
             response  = LLM_model.process_answer(query)
+            response = insert_newlines(response)
             # response  = "respuesta sin IA"
             thinking_message.text(response)
 
