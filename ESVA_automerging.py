@@ -24,7 +24,7 @@ openai.api_key = os.environ['OpenAi-apiKey']
 def load_automerging_index(
     llm,
     embed_model="sentence-transformers/all-MiniLM-L6-v2",
-    save_dir="./files/HR_demo_db",
+    save_dir="./files",
 ):
     if not os.path.exists(save_dir):
         print("no se encontró base de datos")
@@ -68,7 +68,7 @@ try:
     index = load_automerging_index(
         llm=llm,
         # merging means that the docs are separated
-        save_dir='./files/HR_demo_db',
+        save_dir='./files',
     )
     query_engine = get_automerging_query_engine(index, similarity_top_k=6)
 except Exception as e:
