@@ -1,9 +1,6 @@
-Flask==3.0.0
-flask_cors==3.0.10
 waitress==2.0.0
 PyDrive2
 setuptools-rust
-Flask
 
 aiohttp==3.9.3
 aiosignal==1.3.1
@@ -110,4 +107,3 @@ yarl==1.9.4
 zipp==3.17.0
 PyDrive2
 setuptools-rust
-Flask

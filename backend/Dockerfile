@@ -1,10 +1,19 @@
-FROM python:3.12-alpine3.17
+FROM python:3.10.11
 
-WORKDIR /app
+# Instalación de las dependencias necesarias
+RUN apt-get update && apt-get install -y \
+    python3-dev \
+    build-essential \
+    gcc \
+    g++
 
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+# Copiar el directorio actual al contenedor en /usr/src/app
+COPY . /usr/src/app
 
-COPY . .
+# Establecer el directorio de trabajo
+WORKDIR /usr/src/app
+
+# Instalar las dependencias de Python
+RUN pip install --no-cache-dir -r requirements.txt
 
 CMD [ "python", "-m", "flask", "run", "--host=0.0.0.0" ]
