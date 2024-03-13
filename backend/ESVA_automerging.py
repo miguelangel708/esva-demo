@@ -16,31 +16,6 @@ import GoogleDrive
 import QuickStart
 
 
-openai.api_key = os.environ['OpenAi-apiKey']
-os.mkdir('./files')
-ruta_absoluta = os.path.abspath('./files') + '/'
-GoogleDrive.bajar_archivo_por_id('1zRpE_C7rDWdvAynNk1D9C2WrDlHlYS4p',ruta_absoluta)
-GoogleDrive.bajar_archivo_por_id('1vKXwTgrfjYq9UCsFxx6mZtgnXW0CpF2R',ruta_absoluta)
-GoogleDrive.bajar_archivo_por_id('1VNvu9-JvO1Z2dz6fXetsjCEzKudq3nrr',ruta_absoluta)
-GoogleDrive.bajar_archivo_por_id('1NJl98Yo4Lb4N2xLPvbmdG2r2gNRzjHM0',ruta_absoluta)
-GoogleDrive.bajar_archivo_por_id('1v0uP6l5S2QBVTAE2b40o-U1kVx9fwYaq',ruta_absoluta)
-# Directorio de la carpeta
-carpeta = 'files'
-
-# Verificar si la carpeta existe
-if os.path.exists(carpeta) and os.path.isdir(carpeta):
-    # Obtener la lista de archivos en la carpeta
-    archivos = os.listdir(carpeta)
-    
-    # Imprimir los nombres de los archivos
-    print("Archivos en la carpeta 'files':")
-    for archivo in archivos:
-        ruta_completa = os.path.join(carpeta, archivo)
-        tamaño = os.path.getsize(ruta_completa)
-        print(f"Archivo: {archivo} - Tamaño: {tamaño} bytes")
-        
-# Load LLM
-
 # load vector index database
 def load_automerging_index(
     llm,
@@ -78,13 +53,7 @@ def get_automerging_query_engine(
     )
     return auto_merging_engine
 
-llm = OpenAI(model="gpt-3.5-turbo", temperature=0.1)
-index = load_automerging_index(
-    llm=llm,
-    save_dir='./files',  #merging means that the docs are separated
-)
-query_engine = get_automerging_query_engine(index, similarity_top_k=6)
-    
+
 def process_answer(query):
     try:
         if openai.api_key == None: return "ingrese la open ai key"
@@ -103,3 +72,15 @@ def process_answer(query):
         return "llave open ai invalida"
     
     return response.response + f' \n Documento Fuente: {source_documents}'
+
+# download database
+GoogleDrive.download_and_save_database()
+# load openai api key
+openai.api_key = os.environ['OpenAi-apiKey']
+# load model 
+llm = OpenAI(model="gpt-3.5-turbo", temperature=0.1)
+# load database
+index = load_automerging_index(llm=llm,save_dir='./files')
+# load query engine
+query_engine = get_automerging_query_engine(index, similarity_top_k=6)
+    
