@@ -1,10 +1,11 @@
 import streamlit as st
 import time
 import requests
+import os
 
 # POST
 def post_answer(question):
-    url = 'https://pruebabackend-soel3q6bbq-uc.a.run.app/askQuestion'  
+    url = os.environ['Backend-Path'] + '/askQuestion'
     data = {'question': question}
     response = requests.post(url, json=data)
     if response.status_code == 200:
@@ -14,7 +15,7 @@ def post_answer(question):
 
 # GET   
 def get_answer():
-    url = 'https://pruebabackend-soel3q6bbq-uc.a.run.app/test'  
+    url = os.environ['Backend-Path'] + '/test'  
     response = requests.get(url)
     if response.status_code == 200:
         return response.json()['message']
@@ -66,7 +67,12 @@ def main():
             time.sleep(0.5)
             thinking_message.text("pensando...")  # We use st.text instead of st.markdown
             # here in the response put the result of the RAG model
-            response  =  post_answer(query)
+            
+            if ( response == "test"):
+                response  =  get_answer(query)
+            else:
+                response  =  post_answer(query)
+                
             response = insert_newlines(response,76)
             # response  = responseTest.response(query)
             thinking_message.text(response)
