@@ -17,6 +17,7 @@ import QuickStart
 
 
 openai.api_key = os.environ['OpenAi-apiKey']
+os.mkdir('./files')
 ruta_absoluta = os.path.abspath('./files') + '/'
 GoogleDrive.bajar_archivo_por_id('1zRpE_C7rDWdvAynNk1D9C2WrDlHlYS4p',ruta_absoluta)
 GoogleDrive.bajar_archivo_por_id('1vKXwTgrfjYq9UCsFxx6mZtgnXW0CpF2R',ruta_absoluta)
