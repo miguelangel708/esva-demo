@@ -68,7 +68,7 @@ def main():
             thinking_message.text("pensando...")  # We use st.text instead of st.markdown
             # here in the response put the result of the RAG model
             
-            if ( response == "test"):
+            if ( query == "test"):
                 response  =  get_answer(query)
             else:
                 response  =  post_answer(query)
