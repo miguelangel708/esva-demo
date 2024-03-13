@@ -69,7 +69,7 @@ def main():
             # here in the response put the result of the RAG model
             
             if ( query == "test"):
-                response  =  get_answer(query)
+                response  =  get_answer()
             else:
                 response  =  post_answer(query)
                 
