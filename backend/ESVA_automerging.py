@@ -70,17 +70,22 @@ def process_answer(query):
     except AuthenticationError as e:
         print(e)
         return "llave open ai invalida"
+    except Exception as e:
+        return "error al generar la respuesta"
     
     return response.response + f' \n Documento Fuente: {source_documents}'
 
-# download database
-GoogleDrive.download_and_save_database()
-# load openai api key
-openai.api_key = os.environ['OpenAi-apiKey']
-# load model 
-llm = OpenAI(model="gpt-3.5-turbo", temperature=0.1)
-# load database
-index = load_automerging_index(llm=llm,save_dir='./files')
-# load query engine
-query_engine = get_automerging_query_engine(index, similarity_top_k=6)
-    
+try:
+    # download database
+    GoogleDrive.download_and_save_database()
+    # load openai api key
+    openai.api_key = os.environ['OpenAi-apiKey']
+    # load model 
+    llm = OpenAI(model="gpt-3.5-turbo", temperature=0.1)
+    # load database
+    index = load_automerging_index(llm=llm,save_dir='./files')
+    # load query engine
+    query_engine = get_automerging_query_engine(index, similarity_top_k=6)
+
+except Exception as e:
+    print(f"error al cargar el modelo: {e}")

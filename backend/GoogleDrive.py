@@ -45,11 +45,15 @@ def show_database_info():
     
     
 def download_and_save_database():
-    os.mkdir('./files')
-    ruta_absoluta = os.path.abspath('./files') + '/'
-    bajar_archivo_por_id('1zRpE_C7rDWdvAynNk1D9C2WrDlHlYS4p',ruta_absoluta)
-    bajar_archivo_por_id('1vKXwTgrfjYq9UCsFxx6mZtgnXW0CpF2R',ruta_absoluta)
-    bajar_archivo_por_id('1VNvu9-JvO1Z2dz6fXetsjCEzKudq3nrr',ruta_absoluta)
-    bajar_archivo_por_id('1NJl98Yo4Lb4N2xLPvbmdG2r2gNRzjHM0',ruta_absoluta)
-    bajar_archivo_por_id('1v0uP6l5S2QBVTAE2b40o-U1kVx9fwYaq',ruta_absoluta)
-    show_database_info()
+    try:
+        os.mkdir('./files')
+        ruta_absoluta = os.path.abspath('./files') + '/'
+        bajar_archivo_por_id('1zRpE_C7rDWdvAynNk1D9C2WrDlHlYS4p',ruta_absoluta)
+        bajar_archivo_por_id('1vKXwTgrfjYq9UCsFxx6mZtgnXW0CpF2R',ruta_absoluta)
+        bajar_archivo_por_id('1VNvu9-JvO1Z2dz6fXetsjCEzKudq3nrr',ruta_absoluta)
+        bajar_archivo_por_id('1NJl98Yo4Lb4N2xLPvbmdG2r2gNRzjHM0',ruta_absoluta)
+        bajar_archivo_por_id('1v0uP6l5S2QBVTAE2b40o-U1kVx9fwYaq',ruta_absoluta)
+        show_database_info()    
+    except Exception as e:
+        print(f"error en el acceso del drive: {e}")
+    
