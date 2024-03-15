@@ -1,8 +1,5 @@
 from flask import Blueprint, request
-from requests import get
 from flask import jsonify
-from function_jwt import validate_token
-
 test_api = Blueprint("test_api", __name__)
 
 # @test_api.before_request
