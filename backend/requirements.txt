@@ -9,11 +9,11 @@ Flask==3.0.2
 Flask-Cors==4.0.0
 pyjwt
 # RAG model
-aiohttp==3.9.3
-llama-index==0.9.45.post1
-nltk==3.8.1
-numpy==1.26.4
-openai==1.11.1
-pandas==2.2.0
-sentence-transformers==2.3.1
-transformers==4.37.2
+# aiohttp==3.9.3
+# llama-index==0.9.45.post1
+# nltk==3.8.1
+# numpy==1.26.4
+# openai==1.11.1
+# pandas==2.2.0
+# sentence-transformers==2.3.1
+# transformers==4.37.2

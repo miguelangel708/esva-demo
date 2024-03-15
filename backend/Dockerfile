@@ -16,4 +16,7 @@ WORKDIR /usr/src/app
 # Instalar las dependencias de Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD [ "python", "-m", "flask", "run", "--host=0.0.0.0" ]
+EXPOSE 5000
+
+# Comando para ejecutar la aplicación cuando se inicie el contenedor
+CMD ["python", "main.py"]
