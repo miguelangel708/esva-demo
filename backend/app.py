@@ -10,7 +10,7 @@ app.register_blueprint(routes_auth, url_prefix="/api")
 app.register_blueprint(get_answer, url_prefix="/api")
 app.register_blueprint(test_api, url_prefix="/test")
 
-CORS(app, resources={r"*": {"origins": "*"}})
+CORS(app)
 
 if __name__ == '__main__':
         

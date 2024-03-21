@@ -28,8 +28,10 @@ def validate_token(token, output= False):
         if output:
             return decode(token, key=secret
 , algorithms=["HS256"])
+            
         decode(token, key=secret
 , algorithms=["HS256"])
+        
     except exceptions.DecodeError:
         response = jsonify({"message": "Invalid Token"})
         response.status_code = 401
