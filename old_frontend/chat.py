@@ -2,33 +2,42 @@ import streamlit as st
 import time
 import requests
 import os
+import apiClient
 
-# POST
-def post_answer(question):
-    url = os.environ['Backend-Path'] + '/askQuestion'
-    data = {'question': question}
-    response = requests.post(url, json=data)
-    if response.status_code == 200:
-        return response.json()['response']
-    else:
-        return 'Error al obtener la respuesta de la API'
+bearer_token = "jk123"
 
-# GET   
-def get_answer():
-    url = os.environ['Backend-Path'] + '/test'  
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()['message']
-    else:
-        return 'Error al obtener la respuesta de la API'
+class Chat:
+    def __init__(self):
+        self.user = None
+        self.psswrd = None
+        self.bearer_token = None
+
+    def get_inputs(self):
+        self.num1 = st.number_input("Ingrese el primer número:")
+        self.num2 = st.number_input("Ingrese el segundo número:")
+
+    def calculate_sum(self):
+        self.result = self.num1 + self.num2
+
+    def display_result(self):
+        st.write(f"La suma de {self.num1} y {self.num2} es: {self.result}")
+        
 
 def insert_newlines(text, every=75):
-    """
-    Inserta un salto de línea cada 'every' caracteres en el texto dado.
-    """
     return '\n'.join(text[i:i+every] for i in range(0, len(text), every))
 
-
+def on_button_click(username, password):
+    global bearer_token
+    # bearer_token = apiClient.login(username="Admin@west.net.co", password="West2024")
+    bearer_token = apiClient.login(username, password)
+    if(bearer_token == 'error'): 
+        st.sidebar.write("no se pudo conectar con la api")
+        return
+    if(bearer_token == 'connection error'): 
+        st.sidebar.write("credenciales invalidas")
+        return
+    st.sidebar.write(f"resultado del bearer token {bearer_token}")
+    
 def main():
 
     # Page title and logo
@@ -43,6 +52,19 @@ def main():
 
     st.markdown(image_html, unsafe_allow_html=True)
     st.markdown(page_title, unsafe_allow_html=True)
+    
+    st.sidebar.title("Modulo de inicio de sesión:"  )
+    
+    # st.sidebar.subheader("Usuario")
+    user_input = st.sidebar.text_input("User")
+    
+    # st.sidebar.subheader("Contraseña")
+    password_input = st.sidebar.text_input("Password", type="password")
+    
+    if st.sidebar.button("Validar"):  on_button_click(user_input, password_input)
+    
+    st.sidebar_state = False
+
 
     # initialize chat history
     if "messages" not in st.session_state:
@@ -68,11 +90,16 @@ def main():
             thinking_message.text("pensando...")  # We use st.text instead of st.markdown
             # here in the response put the result of the RAG model
             
-            if ( query == "test"):
-                response  =  get_answer()
-            else:
-                response  =  post_answer(query)
-                
+            # if ( query == "test"):
+            #     response  =  get_answer()
+            # else:
+            #     response  =  post_answer(query)
+            response = "debes iniciar sesión"
+            print(f"token recibido {bearer_token}")
+            if (bearer_token != 'jk123'):
+                response = apiClient.ask_question(bearer_token, query)
+            
+            # response = f"respuesta a la pregunta {query}"
             response = insert_newlines(response,76)
             # response  = responseTest.response(query)
             thinking_message.text(response)

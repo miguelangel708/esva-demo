@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="chatbot.js" defer></script>
+    <title>ESVA Gestion documental</title>
+    <link rel="icon" type="image/png" href=https://west.net.co/wp-content/uploads/2023/06/Logo-Usuario-jpg.jpg>
+
+    <!-- Aquí puedes incluir enlaces a hojas de estilos CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+<body>
+    <header class="main-header">
+        <label for="btn-nav" class="btn-nav">
+            <i class="fas fa-home"></i>
+        </label>
+
+        <input type="checkbox" id="btn-nav">
+
+
+
+        <nav>
+            <ul class="navigation">
+                <li><a href="./index.html">Inicio</a></li>
+
+                <li><button onclick="test()">Test de funcionamiento</button>
+                </li>
+                <li> <button onclick="imprimirJWT()">imprimir token</button>
+                </li>
+                <li><button onclick="testToken()">validar el Token</button>
+                </li>
+                <li><a href="./miniChat/chatbot.html">Chat para paginas</a></li>
+            </ul>
+        </nav>
+        <!-- <label for="btn-nav btn-out" class="btn-nav">
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+        </label> -->
+    </header>
+    <div class="info">
+        <img class="logo" src="https://west.net.co/wp-content/uploads/2024/01/westlogo.png"></span>
+        <header>
+            <h1> ESVA Document AI Chat </h1>
+        </header>
+        <div class="textInfo">
+            <p>¡Hola! Soy el asistente virtual de WEST Engineering SAS. Estoy disponible para responder tus consultas de
+                tipo administrativo sobre todos los procedimientos de nuestra empresa.</p>
+            <p>Puedes hacerme preguntas sobre temas como recursos humanos, procesos internos, políticas de la empresa, y
+                mucho más. Estoy aquí para ayudarte en lo que necesites.</p>
+            <p>Por favor, siéntete libre de escribir tu pregunta en el chat y yo te responderé lo mejor que pueda.</p>  
+        </div>
+    </div>
+
+    <button class="chatbot-toggler">
+        <span class="material-symbols-rounded">mode_comment</span>
+        <span class="material-symbols-outlined">close</span>
+    </button>
+    <!-- sección chatbot -->
+    <div class="chatbot">
+        <header>
+            <h2>WESTbot</h2>
+            <span class="close-btn material-symbols-outlined">close</span>
+        </header>
+        <ul class="chatbox">
+            <li class="chat incoming">
+                <span><img src="https://west.net.co/wp-content/uploads/2024/01/westbot.jpeg"></span>
+                <p>Hola! soy WESTbot, tu chat personal <br>¿Cómo puedo ayudarte hoy? ¿Quieres conocer sobre algún tema
+                    en particular?
+                </p>
+            </li>
+        </ul>
+        <div class="chat-input">
+            <textarea placeholder="Introduzca la opción" spellcheck="false" required></textarea>
+            <span id="send-btn" class="material-symbols-rounded">send</span>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
