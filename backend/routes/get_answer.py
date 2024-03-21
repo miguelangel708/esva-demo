@@ -26,5 +26,4 @@ def gestAnswer():
     data = request.get_json()
     query = data['query']
     response = process_answer(query)
-    print(response)
-    return jsonify({"message":f"respuesta desde la api, {response}"}),200
+    return jsonify({"message":f"{response}"}),200
